@@ -201,8 +201,8 @@ const transporter = nodemailer.createTransporter({
 
 For issues or questions:
 - **Email**: info@watermelon.com
-- **Phone**: +91 73794 32316
-- **WhatsApp**: +91 73794 32316
+- **Phone**: Update Phone Number
+- **WhatsApp**: Update Phone Number
 
 ## 🔄 Updates
 
