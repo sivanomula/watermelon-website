@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watermelon - Technical Interview as a Service</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Demo Form Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Your Free Demo</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Experience the future of hiring with Watermelon Talents!</p>
+                <form id="demoForm" class="demo-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position/Role</label>
+                        <input type="text" id="position" name="position">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Requirements</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Tell us about your hiring needs..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Demo Time</label>
+                        <select id="preferredTime" name="preferredTime">
+                            <option value="">Select preferred time</option>
+                            <option value="morning">Morning (9 AM - 12 PM)</option>
+                            <option value="afternoon">Afternoon (12 PM - 3 PM)</option>
+                            <option value="evening">Evening (3 PM - 6 PM)</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Book Demo
+                        </button>
+                        <button type="button" class="cancel-btn" onclick="closeModal()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Demo Request Submitted!</h2>
+                <span class="close" onclick="closeSuccessModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for your interest in Watermelon! We've received your demo request.</p>
+                <div class="success-details">
+                    <p><strong>What happens next:</strong></p>
+                    <ul>
+                        <li>📧 Email notification sent to our team</li>
+                        <li>📱 WhatsApp message sent to our team</li>
+                        <li>Our team will contact you within 24 hours</li>
+                        <li>We'll schedule your personalized demo</li>
+                    </ul>
+                </div>
+                <div class="contact-info">
+                    <p><strong>Need immediate assistance?</strong></p>
+                    <p><i class="fas fa-phone"></i> +91 8867823566</p>
+                    <p><i class="fas fa-envelope"></i> info@Lytx.com</p>
+                </div>
+                <button class="close-success-btn" onclick="closeSuccessModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header/Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>WATERMELON</h2>
+                    <span class="founded-by">Founded by <strong>IIT</strong>ians</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#domains">Domains</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="#login">Login</a></li>
+                    <li class="contact-number">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+918867823566">+91 8867823566</a>
+                    </li>
+                    <li><button class="cta-button" onclick="openModal()">Start Demo</button></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Technical Interview as a Service</h1>
+                    <p class="hero-subtitle">Outsource Candidate Sourcing</p>
+                    <p class="expertise-tag">Expert in IT domain since 2017</p>
+                    <button class="hero-cta" onclick="openModal()">Start Demo</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Key Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Ratings Received</h3>
+                        <p>Airbus 4/5, Volkswagen 4.5/5</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>1,80,000</h3>
+                        <p>Interviews Done</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>120</h3>
+                        <p>Corporates as Clients</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>2500</h3>
+                        <p>Interviewers in Network</p>
+                    </div>
+                </div>
+            </div>
+            <div class="client-statement">
+                <p>120+ MNC clients and adding</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Serve Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">What We Serve</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>For Organisation</h3>
+                    <ul>
+                        <li>Interview outsourcing</li>
+                        <li>Coding assessment</li>
+                        <li>Resume sourcing</li>
+                        <li>Pre-screened resume sourcing</li>
+                        <li>Revaluation of your candidate</li>
+                    </ul>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>For Interviewer</h3>
+                    <ul>
+                        <li>Interviewing as a freelancer</li>
+                        <li>Paid on interview basis</li>
+                        <li>Get certified as an expert</li>
+                        <li>Strengthen your skills</li>
+                        <li>Coordinate at WhatsApp</li>
+                    </ul>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>For Jobseeker</h3>
+                    <ul>
+                        <li>Mock interviews</li>
+                        <li>Career counseling</li>
+                        <li>Ask from experts</li>
+                        <li>Know your feedback</li>
+                        <li>Get notified for openings</li>
+                    </ul>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Panel Strength Section -->
+    <section id="domains" class="panel-section">
+        <div class="container">
+            <h2 class="section-title">Our Panel Strength</h2>
+            <div class="panel-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Technology</th>
+                            <th>Panels</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Backend - JavaJ2EE, Spring, Hibernate</td>
+                            <td>450 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Backend - .NETC#, ASP.NET, .NET Core</td>
+                            <td>140 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Backend - PythonPython, PHP, Ruby</td>
+                            <td>183 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>JavaScriptTypeScript, jQuery</td>
+                            <td>161 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft Azure</td>
+                            <td>169 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Docker</td>
+                            <td>74 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>SAP</td>
+                            <td>107 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Amazon Web Services</td>
+                            <td>210 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>React</td>
+                            <td>127 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Angular</td>
+                            <td>185 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>UX/UI</td>
+                            <td>96 Panels</td>
+                        </tr>
+                        <tr>
+                            <td>Android & IOS</td>
+                            <td>59 Panels</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-cta">
+                <button class="cta-button" onclick="openModal()">Start Your Free Trial</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Interviewing Expertise Section -->
+    <section class="expertise-section">
+        <div class="container">
+            <h2 class="section-title">Our Interviewing Expertise</h2>
+            <p class="expertise-intro">
+                Our Technical Skills Interview is designed to assess a candidate's capabilities across a wide range of disciplines to evaluate candidate's technical knowledge and practical skills.
+            </p>
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <i class="fas fa-server"></i>
+                    <h3>Web Backend interviews</h3>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Web Frontend interviews</h3>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud services interviews</h3>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>QA-Networking interviews</h3>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>BI SAP ERP interviews</h3>
+                </div>
+                <div class="expertise-item">
+                    <i class="fas fa-industry"></i>
+                    <h3>Manufacturing interviews</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique AI-ML Features Section -->
+    <section class="ai-features-section">
+        <div class="container">
+            <h2 class="section-title">Unique AI-ML Features</h2>
+            <p class="ai-intro">
+                WATERMELON is leading the charge in innovation by introducing cutting-edge AI toolkits to streamline the interview process like never before. This new trend is revolutionizing the way companies identify and engage with potential candidates.
+            </p>
+            <div class="ai-features-grid">
+                <div class="ai-feature-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>PlagDetector AI</h3>
+                    <p>Detects and deters plagiarism in candidate code submissions.</p>
+                </div>
+                <div class="ai-feature-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Intellifit AI</h3>
+                    <p>Redefines interviewer selection with cognitive compatibility assessment for optimal interviewer match.</p>
+                </div>
+                <div class="ai-feature-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3>AuthNinja AI</h3>
+                    <p>Elevates interview security with biometric technology for robust identity verification.</p>
+                </div>
+                <div class="ai-feature-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>TalentMatch AI</h3>
+                    <p>Empowers recruiters with algorithms to match job descriptions with candidate resumes.</p>
+                </div>
+                <div class="ai-feature-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3>ProxyShield AI</h3>
+                    <p>Ultimate defense against deep fake proxies in interviews using deep fake detection technology.</p>
+                </div>
+                <div class="ai-feature-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Transcript Summary</h3>
+                    <p>Transforms interview data into concise and structured summaries for actionable insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Technology Features Section -->
+    <section class="tech-features-section">
+        <div class="container">
+            <h2 class="section-title">Key Technology Features</h2>
+            <div class="tech-features-grid">
+                <div class="tech-feature">
+                    <div class="tech-content">
+                        <h3>Analysis of interview by AI</h3>
+                        <p>For ratings and summary, deep technical analysis of transcript.</p>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">START YOUR FREE TRIAL</button>
+                </div>
+                <div class="tech-feature">
+                    <div class="tech-content">
+                        <h3>Automated parsing from CVs with bulk upload</h3>
+                        <p>Extracts skills, experiences from CVs.</p>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">START YOUR FREE TRIAL</button>
+                </div>
+                <div class="tech-feature">
+                    <div class="tech-content">
+                        <h3>Live coding tests</h3>
+                        <p>With AI-based plagiarism detection.</p>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">START YOUR FREE TRIAL</button>
+                </div>
+                <div class="tech-feature">
+                    <div class="tech-content">
+                        <h3>Interview scheduling and coordination</h3>
+                        <p>Simplifies the process by taking resumes and providing reports.</p>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">START YOUR FREE TRIAL</button>
+                </div>
+                <div class="tech-feature">
+                    <div class="tech-content">
+                        <h3>Dashboard for real-time tracking and data analysis</h3>
+                        <p>Provides insights into performance.</p>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">START YOUR FREE TRIAL</button>
+                </div>
+                <div class="tech-feature">
+                    <div class="tech-content">
+                        <h3>Detailed report with Video recording and transcript</h3>
+                        <p>Automated recording and feedback mailing.</p>
+                    </div>
+                    <button class="cta-button" onclick="openModal()">START YOUR FREE TRIAL</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why to choose Cangra as interview partner? Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2 class="section-title">Why to choose Watermelon as interview partner?</h2>
+            <p class="why-intro">
+                WATERMELON is streamlining the interview process innovation by introducing cutting-edge AI-powered tools...
+            </p>
+            <div class="why-choose-grid">
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Cost-Effective</h3>
+                    <p>Optimises expenses using expert panels and AI tools.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Industry Solutions</h3>
+                    <p>Tailored solutions for interview outsourcing and candidate sourcing, including video interviews and data-driven approaches.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Time-Saving</h3>
+                    <p>Accelerates the process with streamlined approach and advanced algorithms.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Experienced Interviewers</h3>
+                    <p>Diverse pool of expert interviewers with firsthand experience and detailed evaluations.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Feedback Reports</h3>
+                    <p>Provides detailed reports with structured insights on candidate performance.</p>
+                </div>
+            </div>
+            <div class="why-cta">
+                <button class="cta-button" onclick="openModal()">Start Your Free Trial</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ISO-Certified Excellence in Data Security Section -->
+    <section class="iso-section">
+        <div class="container">
+            <h2 class="section-title">Experience Unbeatable Security and Compliance with Watermelon Talents</h2>
+            <div class="iso-content">
+                <div class="iso-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="iso-details">
+                    <ul>
+                        <li>ISO-certified company for data security and privacy.</li>
+                        <li>Leverages robust cloud storage solutions.</li>
+                        <li>Implements strong passwords and state-of-the-art encryption protocols.</li>
+                        <li>All data transfers secured using HTTPS or SSH.</li>
+                        <li>Offers options for data extraction and deletion upon request.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivering Value To Our Clientele Section (Testimonials) -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Delivering Value To Our Clientele</h2>
+            <p class="testimonials-intro">
+                Every challenge is an opportunity for Watermelon. We deliver solutions that help you mark your presence in the digital world.
+            </p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Watermelon has transformed our hiring process with their innovative AI-powered interview solutions. The quality of candidates has improved significantly."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Mini S</h4>
+                            <p>TA Manager, ACSIA Technologies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The technical expertise and professionalism of Watermelon's interviewers have made our recruitment process much more efficient and reliable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Eben Thomas</h4>
+                            <p>MD, PDG Software</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Watermelon's AI tools have revolutionized how we assess technical candidates. The detailed reports and insights are invaluable for our decision-making."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sanjay Sahu</h4>
+                            <p>Manager-TA, EKA Software</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The cost-effectiveness and time-saving benefits of Watermelon's services have exceeded our expectations. Highly recommended for any organization."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Ajay Gurnani</h4>
+                            <p>Customer Success Leader, Comviva</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Watermelon's comprehensive interview solutions have streamlined our talent acquisition process. The quality and depth of technical assessments are outstanding."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Shwetha R</h4>
+                            <p>Manager TA, InsurePro</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We are Section -->
+    <section id="about" class="who-we-are-section">
+        <div class="container">
+            <h2 class="section-title">Who We Are</h2>
+            <div class="who-we-are-content">
+                <div class="founding-info">
+                    <p>Founded in 2017 by a team of IIT-Kanpur alumni, IIT-BHU alumni, and an Industry veteran.</p>
+                    <p><strong>Advisors:</strong> Eminent personalities including Mr. Vinod Sood (MD, Hughes Systique).</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="member-info">
+                            <h3>Ashu Pathak</h3>
+                            <p class="member-title">Co-Founder</p>
+                            <p class="member-bio">IIT Varanasi alumni, 16 years experience in USA & UK, observed need to transform interview process.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="member-info">
+                            <h3>Supriya Verma</h3>
+                            <p class="member-title">Head - Operations</p>
+                            <p class="member-bio">15+ years experience in HR, BD and Operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section class="vision-mission-section">
+        <div class="container">
+            <div class="vision-mission-grid">
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Vision</h3>
+                    <p>To become a global benchmark for talent grading across industries (IT, manufacturing, medical).</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Mission</h3>
+                    <p>In-depth analysis of talents by experts assisted by advanced technologies to help clients achieve goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Call to Action/Footer Section -->
+    <section class="final-cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Start your free trial</h2>
+                <p>Experience the future of hiring with Watermelon Talents! Book your 3 free demos now to revolutionize your interviewing process.</p>
+                <p class="cta-benefit">Elevate your talent acquisition strategy with cutting-edge technology and expert guidance.</p>
+                <button class="cta-button large" onclick="openModal()">BOOK A DEMO</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>WATERMELON</h3>
+                    <p>Technical Interview as a Service</p>
+                    <p>Founded by IITians</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#domains">Domains</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +91 8867823566</p>
+                    <p><i class="fas fa-envelope"></i> info@Lytx.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Watermelon. All rights reserved. | ISO-Certified Excellence in Data Security</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Form Test - Watermelon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .test-info {
+            background: #e3f2fd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .test-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .test-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🚀 Watermelon Demo Form Test</h1>
+        
+        <div class="test-info">
+            <h3>📋 Test Instructions:</h3>
+            <ol>
+                <li>Click "Test Demo Form" to open the modal</li>
+                <li>Fill out the form with test data</li>
+                <li>Submit to see the email and WhatsApp functionality</li>
+                <li>Check the browser console for API responses</li>
+            </ol>
+            
+            <h3>🔧 Setup Required:</h3>
+            <ul>
+                <li>Create <code>.env</code> file with email credentials</li>
+                <li>Run <code>npm start</code> to start the server</li>
+                <li>Access via <code>http://localhost:3000</code></li>
+            </ul>
+        </div>
+        
+        <div class="test-buttons">
+            <button class="test-btn" onclick="openModal()">
+                <i class="fas fa-play"></i>
+                Test Demo Form
+            </button>
+            <button class="test-btn" onclick="testWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                Test WhatsApp
+            </button>
+            <button class="test-btn" onclick="viewStoredData()">
+                <i class="fas fa-database"></i>
+                View Stored Data
+            </button>
+        </div>
+        
+        <div id="testResults"></div>
+    </div>
+
+    <!-- Demo Form Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Your Free Demo</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Experience the future of hiring with Watermelon Talents!</p>
+                <form id="demoForm" class="demo-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position/Role</label>
+                        <input type="text" id="position" name="position">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Requirements</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Tell us about your hiring needs..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Demo Time</label>
+                        <select id="preferredTime" name="preferredTime">
+                            <option value="">Select preferred time</option>
+                            <option value="morning">Morning (9 AM - 12 PM)</option>
+                            <option value="afternoon">Afternoon (12 PM - 3 PM)</option>
+                            <option value="evening">Evening (3 PM - 6 PM)</option>
+                            <option value="flexible">Flexible</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Book Demo
+                        </button>
+                        <button type="button" class="cancel-btn" onclick="closeModal()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Demo Request Submitted!</h2>
+                <span class="close" onclick="closeSuccessModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for your interest in Watermelon! We've received your demo request.</p>
+                <div class="success-details">
+                    <p><strong>What happens next:</strong></p>
+                    <ul>
+                        <li>Our team will contact you within 24 hours</li>
+                        <li>We'll schedule your personalized demo</li>
+                        <li>You'll receive a confirmation email</li>
+                    </ul>
+                </div>
+                <div class="contact-info">
+                    <p><strong>Need immediate assistance?</strong></p>
+                    <p><i class="fas fa-phone"></i> +91 73794 32316</p>
+                    <p><i class="fas fa-envelope"></i> info@watermelon.com</p>
+                </div>
+                <button class="close-success-btn" onclick="closeSuccessModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Include the modal functionality from script.js
+        const demoModal = document.getElementById('demoModal');
+        const successModal = document.getElementById('successModal');
+        const demoForm = document.getElementById('demoForm');
+
+        // Open demo modal
+        function openModal() {
+            demoModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close demo modal
+        function closeModal() {
+            demoModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close success modal
+        function closeSuccessModal() {
+            successModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === demoModal) {
+                closeModal();
+            }
+            if (e.target === successModal) {
+                closeSuccessModal();
+            }
+        });
+
+        // Close modal with X button
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                closeModal();
+            });
+        });
+
+        // Test WhatsApp functionality
+        function testWhatsApp() {
+            showTestResult('WhatsApp is now handled server-side. Test by submitting a demo form.');
+        }
+
+        // View stored data
+        function viewStoredData() {
+            const requests = JSON.parse(localStorage.getItem('demoRequests') || '[]');
+            const resultsDiv = document.getElementById('testResults');
+            
+            if (requests.length === 0) {
+                resultsDiv.innerHTML = '<div class="test-info"><p>No stored demo requests found.</p></div>';
+            } else {
+                let html = '<div class="test-info"><h3>📊 Stored Demo Requests:</h3>';
+                requests.forEach((request, index) => {
+                    html += `
+                        <div style="border: 1px solid #ddd; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+                            <h4>Request ${index + 1}</h4>
+                            <p><strong>Name:</strong> ${request.name}</p>
+                            <p><strong>Email:</strong> ${request.email}</p>
+                            <p><strong>Phone:</strong> ${request.phone}</p>
+                            <p><strong>Company:</strong> ${request.company || 'Not specified'}</p>
+                            <p><strong>Timestamp:</strong> ${new Date(request.timestamp).toLocaleString()}</p>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                resultsDiv.innerHTML = html;
+            }
+        }
+
+        // Show test results
+        function showTestResult(message) {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = `<div class="test-info"><p>✅ ${message}</p></div>`;
+        }
+
+        // Create WhatsApp message (from script.js)
+        function createWhatsAppMessage(data) {
+            return `🚀 *New Demo Request - Watermelon Website*
+
+👤 *Name:* ${data.name}
+📧 *Email:* ${data.email}
+📱 *Phone:* ${data.phone}
+🏢 *Company:* ${data.company || 'Not specified'}
+💼 *Position:* ${data.position || 'Not specified'}
+⏰ *Preferred Time:* ${data.preferredTime || 'Not specified'}
+
+💬 *Additional Requirements:*
+${data.message || 'No additional requirements specified'}
+
+📅 *Requested on:* ${new Date().toLocaleString('en-IN')}
+🌐 *Source:* Watermelon Website Demo Form
+
+---
+Please respond to this demo request within 24 hours.`;
+        }
+
+        // Form submission handler
+        demoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = demoForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = 'Submitting...';
+            
+            // Get form data
+            const formData = new FormData(demoForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                company: formData.get('company'),
+                position: formData.get('position'),
+                message: formData.get('message'),
+                preferredTime: formData.get('preferredTime'),
+                timestamp: new Date().toISOString(),
+                source: 'Watermelon Website Demo Request'
+            };
+            
+            try {
+                // Try to send to API (if server is running)
+                try {
+                    const response = await fetch('/api/demo-request', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    const result = await response.json();
+                    console.log('API Response:', result);
+                    
+                    if (result.success) {
+                        showTestResult('✅ Form submitted successfully! Email sent and WhatsApp opened.');
+                    } else {
+                        throw new Error(result.message);
+                    }
+                    
+                } catch (apiError) {
+                    console.log('API not available, using fallback:', apiError.message);
+                    showTestResult('⚠️ Server not running. Using fallback mode (WhatsApp only).');
+                }
+                
+                // WhatsApp is now handled server-side
+                console.log('📱 WhatsApp message will be sent from server');
+                
+                // Store in localStorage
+                const requests = JSON.parse(localStorage.getItem('demoRequests') || '[]');
+                requests.push(data);
+                localStorage.setItem('demoRequests', JSON.stringify(requests));
+                
+                // Show success modal
+                closeModal();
+                successModal.style.display = 'block';
+                
+                // Reset form
+                demoForm.reset();
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showTestResult('❌ Error submitting form. Please try again.');
+            } finally {
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    </script>
+</body>
+</html> 
