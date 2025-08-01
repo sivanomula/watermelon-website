@@ -48,7 +48,7 @@ The website now uses WhatsApp Web.js to send messages directly from the server t
 
 Make sure your WhatsApp number in the .env file is in the correct format:
 ```
-WHATSAPP_NUMBER=918147768993
+WHATSAPP_NUMBER=Update Phone Number
 ```
 
 **Important**: 
